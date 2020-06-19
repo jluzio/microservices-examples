@@ -3,6 +3,7 @@
 		"_class": "com.example.microservices.playground.user.User",
 		"name": "John Doe",
 		"username": "jdoe",
+		"email": "jdoe@mail.org",
 		"address": {
 			"street": "Lisbon Street, n1",
 			"city": "Lisbon",
@@ -13,6 +14,7 @@
 		"_class": "com.example.microservices.playground.user.User",
 		"name": "Jane Doe",
 		"username": "jndoe",
+		"email": "jndoe@mail.org",
 		"address": {
 			"street": "Pico Street, n2",
 			"city": "Pico",
@@ -23,6 +25,7 @@
 		"_class": "com.example.microservices.playground.user.User",
 		"name": "Little D",
 		"username": "ldoe",
+		"email": "ldoe@mail.org",
 		"address": {
 			"street": "Foreign Doe Street, n1",
 			"city": "Brussels",

@@ -1,21 +1,22 @@
 package com.example.microservices.playground;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @Slf4j
-class MicroservicesPlaygroundApplicationTests {
-  @Value("${spring.messages.basename}")
+@ActiveProfiles("test")
+class PropertyTest {
+  @Value("${spring.messages.basename:null}")
   private String appProp;
-  @Value("${springdoc.swagger-ui.enabled}")
+  @Value("${springdoc.swagger-ui.enabled:null}")
   private String testProp;
 
   @Test
-  void contextLoads() {
+  void test() {
     log.info("props: {} | {}", appProp, testProp);
   }
 

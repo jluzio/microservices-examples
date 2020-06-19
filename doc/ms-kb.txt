@@ -1,3 +1,67 @@
 https://github.com/in28minutes/spring-microservices
 https://github.com/in28minutes/spring-microservices/tree/master/02.restful-web-services
 https://github.com/in28minutes/getting-started-in-5-steps
+
+### REST Resource principles
+- GET /users - list
+HttpStatus: 200
+- GET /users/{id} - get by id
+HttpStatus: 200, 404
+- POST /users - create
+HttpStatus: 201 (with location), 202
+- PUT /users/{id} - update
+HttpStatus: 200, 204 (no return content), 404
+- DELETE /users/{id} - delete by id
+HttpStatus: 200, 204 (no return content), 404
+- PATCH /users/{id} - Optional? - update only passed properties
+HttpStatus: 200, 204 (no return content), 404
+
+#### Other considerations:
+- Search
+ - GET /users/search?filters (request params or other uri methods)
+ - GET /users?filters (request params or other uri methods)
+ - POST /users/search : if the search is very complex, and not required to be cacheable (as GET requests can be)
+ 
+### Validation
+- org.springframework.boot:spring-boot-starter-validation
+- @Valid in controller methods
+- @javax.validation.constraints.* annotations in data
+
+### HATEOS (Hypermedia as the Engine of Application State)
+- org.springframework.boot:spring-boot-starter-hateoas
+- return EntityModel<Body> in response
+- EntityModel.of(user).add( linkTo(...).withRel(<rel-id>) )
+
+### I18n
+- message source:
+ - application.properties: spring.messages.basename
+ - or define ResourceBundleMessageSource bean
+- localeResolver: define bean, AcceptHeaderLocaleResolver for REST
+
+### Content Negotiation
+- json: supported out of the box
+- xml: add com.fasterxml.jackson.dataformat:jackson-dataformat-xml to support inputs (Content-Type) and outputs (Accept) in xml
+
+### REST documentation
+- Swagger 2
+ - io.springfox:springfox-swagger2
+ - io.springfox:springfox-swagger-ui
+ - io.springfox:springfox-data-rest
+ - versions atm: 2.9.2 (OpenApi 2.0), 3.0.0-SNAPSHOT (OpenApi 3.0)
+ - https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
+- springdoc-openapi
+ - org.springdoc:springdoc-openapi-ui
+ - org.springdoc:springdoc-openapi-data-rest
+ - versions atm: 1.4.1 (OpenApi 3.0)
+ - https://www.baeldung.com/spring-rest-openapi-documentation
+
+#### Annotations for documentation: 
+Swagger 2 vs Swagger 3 (used in springdoc-openapi)
+@ApiParam -> @Parameter
+@ApiOperation -> @Operation
+@Api -> @Tag
+@ApiImplicitParams -> @Parameters
+@ApiImplicitParam -> @Parameter
+@ApiIgnore -> @Parameter(hidden = true) or @Operation(hidden = true) or @Hidden
+@ApiModel -> @Schema
+@ApiModelProperty -> @Schema

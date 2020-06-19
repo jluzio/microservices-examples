@@ -1,12 +1,24 @@
 package com.example.microservices.playground.user;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
@@ -15,19 +27,22 @@ public class DemoUserResource {
   @Autowired
   private UserRepository userRepository;
 
-  @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+  @GetMapping
   public Iterable<User> listUsers() {
     return userRepository.findAll();
   }
 
   @GetMapping("{id}")
-  public User getUser(@PathVariable("id") Integer id) {
-    return userRepository.findById(id)
-        .orElseThrow(() -> new UserNotFoundException("id: %s".formatted(id)));
+  public EntityModel<User> getUser(@PathVariable("id") Integer id) {
+    var user = userRepository.findById(id)
+        .orElseThrow(() -> new UserNotFoundException(String.format("id: %s", id)));
+    return EntityModel.of(user,
+        linkTo(methodOn(getClass()).listUsers()).withRel("users"),
+        linkTo(methodOn(getClass()).listUsers()).withRel("users"));
   }
 
   @PostMapping
-  public ResponseEntity<Object> createUser(@RequestBody User user) {
+  public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
     var savedUser = userRepository.save(user);
     var location = ServletUriComponentsBuilder.fromCurrentRequest()
         .path("{id}")
@@ -45,7 +60,11 @@ public class DemoUserResource {
 
   @DeleteMapping("{id}")
   public void deleteUser(@PathVariable("id") Integer id) {
-    userRepository.deleteById(id);
+    try {
+      userRepository.deleteById(id);
+    } catch (Exception e) {
+      throw new UserNotFoundException(String.format("id=%s", id));
+    }
   }
 
   @GetMapping("search")

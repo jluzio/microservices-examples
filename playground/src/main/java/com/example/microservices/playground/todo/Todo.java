@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.example.microservices.playground.user.User;
@@ -19,6 +20,7 @@ public class Todo {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
+  @NotEmpty
   private String title;
   private boolean completed;
   @ManyToOne
