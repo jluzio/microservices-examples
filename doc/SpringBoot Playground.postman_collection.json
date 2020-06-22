@@ -494,14 +494,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api}}/demo/versioning/path-var/v1/person",
+							"raw": "{{api}}/demo/versioning/uri/v1/person",
 							"host": [
 								"{{api}}"
 							],
 							"path": [
 								"demo",
 								"versioning",
-								"path-var",
+								"uri",
 								"v1",
 								"person"
 							]
@@ -641,7 +641,7 @@
 	],
 	"variable": [
 		{
-			"id": "7588be47-7349-4442-9ce0-3ce4ba64a6d2",
+			"id": "1cc00401-e165-42ad-9458-18602c005fe9",
 			"key": "api",
 			"value": "http://localhost:8080/api"
 		}
