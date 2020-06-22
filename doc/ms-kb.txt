@@ -99,3 +99,7 @@ with:
 - documentation
 - can we execute on the browser?
 - no perfect solution
+
+doc:
+https://www.mnot.net/blog/2011/10/25/web_api_versioning_smackdown
+https://urthen.github.io/2013/05/09/ways-to-version-your-api/
