@@ -11,14 +11,12 @@ public class UserAccountService {
   public List<UserAccount> getAllAccounts() {
     return IntStream.rangeClosed(1, 5)
         .mapToObj(Integer::toString)
-        .map(id -> {
-              var user = new UserAccount();
-              user.setId(id);
-              user.setName(String.format("name-%s", id));
-              user.setEmail(String.format("name-%s@mail.org", id));
-              user.setPassword(String.format("pass-%s", id));
-              return user;
-            }
+        .map(id -> UserAccount.builder()
+            .id(id)
+            .name(String.format("name-%s", id))
+            .email(String.format("name-%s@mail.org", id))
+            .password(String.format("pass-%s", id))
+            .build()
         )
         .collect(Collectors.toList());
   }

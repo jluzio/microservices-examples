@@ -484,6 +484,137 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "/demo/versioning",
+			"item": [
+				{
+					"name": "uri",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/demo/versioning/path-var/v1/person",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"demo",
+								"versioning",
+								"path-var",
+								"v1",
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "param",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/demo/versioning/param/person?version=1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"demo",
+								"versioning",
+								"param",
+								"person"
+							],
+							"query": [
+								{
+									"key": "version",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "header",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-VERSION",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/demo/versioning/header/person",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"demo",
+								"versioning",
+								"header",
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "media-type",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/vnd.company.app-v1+json"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/demo/versioning/media-type/person",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"demo",
+								"versioning",
+								"media-type",
+								"person"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api}}/demo/versioning/param/person?version=2",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"demo",
+						"versioning",
+						"param",
+						"person"
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -510,10 +641,9 @@
 	],
 	"variable": [
 		{
-			"id": "b91c9a5b-5741-4555-8df2-636025a914c4",
+			"id": "7588be47-7349-4442-9ce0-3ce4ba64a6d2",
 			"key": "api",
-			"value": "http://localhost:8080/api",
-			"type": "string"
+			"value": "http://localhost:8080/api"
 		}
 	],
 	"protocolProfileBehavior": {}

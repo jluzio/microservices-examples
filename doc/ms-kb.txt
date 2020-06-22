@@ -82,3 +82,20 @@ HAL: Hypertext Application Language
 - application.properties
 # Only include what is useful for production since it impacts performance
 management.endpoints.web.exposure.include=*
+
+### Versioning
+- uri: <api-root>/<version>/<resource>
+- request param: <api-root>/<resource>?version={version}
+- header: <api-root>/<resource>
+with X-API-VERSION=<version>
+- media type: <api-root>/<version>/<resource>
+with:
+  - produces=application/vnd.api-v<version>+json
+  - ACCEPT: application/vnd.api-v<version>+json
+#### Considerations
+- URL polution
+- misuse of HTTP headers
+- cache (header type strategies must consider these headers)
+- documentation
+- can we execute on the browser?
+- no perfect solution
