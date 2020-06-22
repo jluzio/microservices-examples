@@ -65,3 +65,20 @@ Swagger 2 vs Swagger 3 (used in springdoc-openapi)
 @ApiIgnore -> @Parameter(hidden = true) or @Operation(hidden = true) or @Hidden
 @ApiModel -> @Schema
 @ApiModelProperty -> @Schema
+
+### Monitoring
+- org.springframework.boot:spring-boot-starter-actuator
+- http://localhost:8080/actuator
+- https://docs.spring.io/spring-boot/docs/current/actuator-api/html/
+
+HAL: Hypertext Application Language
+- org.springframework.data:spring-data-rest-hal-explorer
+- http://localhost:8080/<api-root>/explorer
+- http://localhost:8080/api/explorer
+- org.springframework.data:spring-data-rest-hal-browser ("deprecated")
+- http://localhost:8080/<api-root>/browser
+- http://localhost:8080/api/browser
+
+- application.properties
+# Only include what is useful for production since it impacts performance
+management.endpoints.web.exposure.include=*
